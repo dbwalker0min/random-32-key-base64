@@ -42,6 +42,6 @@ def main() -> None:
         # Print the result
         print(base64_encoded)
         
-    except Exception as e:
+    except RuntimeError as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
