@@ -15,7 +15,7 @@ def generate_random_bytes(num_bytes: int = 32) -> bytes:
         bytes: Random bytes from random.org
         
     Raises:
-        Exception: If the API request fails
+        RuntimeError: If the API request fails
     """
     url = f"https://www.random.org/cgi-bin/randbyte?nbytes={num_bytes}&format=f"
     
@@ -24,7 +24,7 @@ def generate_random_bytes(num_bytes: int = 32) -> bytes:
             data = response.read()
             return data
     except urllib.error.URLError as e:
-        raise Exception(f"Failed to get random bytes from random.org: {e}")
+        raise RuntimeError(f"Failed to get random bytes from random.org: {e}")
 
 
 def main() -> None:
@@ -34,7 +34,7 @@ def main() -> None:
     """
     try:
         # Generate 32 random bytes from random.org
-        random_bytes = generate_random_bytes(32)
+        random_bytes = generate_random_bytes()
         
         # Convert to base64
         base64_encoded = base64.b64encode(random_bytes).decode('ascii')
